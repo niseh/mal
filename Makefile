@@ -27,7 +27,7 @@ mal_TEST_OPTS = --start-timeout 60 --test-timeout 120
 IMPLS = awk bash c d clojure coffee cpp crystal cs erlang elixir es6 \
 	factor forth fsharp go groovy guile haskell haxe java julia \
 	js kotlin lua make mal ocaml matlab miniMAL nim perl php ps \
-	python r racket rpython ruby rust scala swift tcl vb vimscript
+	python r racket rpython ruby rust scala swift tcl vb vimscript scalapony
 
 step0 = step0_repl
 step1 = step1_read_print
@@ -151,7 +151,7 @@ tcl_STEP_TO_PROG =     tcl/$($(1)).tcl
 vb_STEP_TO_PROG =      vb/$($(1)).exe
 vimscript_STEP_TO_PROG = vimscript/$($(1)).vim
 guile_STEP_TO_PROG =   guile/$($(1)).scm
-
+scalapony_STEP_TO_PROG =   scalapony/$($(1)).scala
 
 # Needed some argument munging
 COMMA = ,
@@ -210,7 +210,7 @@ vb_RUNSTEP =      mono ../$(2) --raw $(3)
 vimscript_RUNSTEP = ./run_vimscript.sh ../$(2) $(3)
 # needs TERM=dumb to work with readline
 guile_RUNSTEP =   guile --no-auto-compile -L ../guile ../$(2) $(3)
-
+scalapony_RUNSTEP = sbt 'run-main $($(1))$(if $(3), $(3),)'
 
 vimscript_TEST_OPTS = --test-timeout 30
 ifeq ($(MAL_IMPL),vimscript)
